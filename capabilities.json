@@ -1,0 +1,156 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Valor Atual",
+      "name": "currentValue",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Meta",
+      "name": "targetValue",
+      "kind": "Measure"
+    }
+  ],
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "currentValue": {
+            "max": 1
+          },
+          "targetValue": {
+            "max": 1
+          }
+        }
+      ],
+      "categorical": {
+        "values": {
+          "select": [
+            {
+              "bind": {
+                "to": "currentValue"
+              }
+            },
+            {
+              "bind": {
+                "to": "targetValue"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "objects": {
+    "valueSettings": {
+      "displayName": "Configurações do Valor",
+      "properties": {
+        "fontSize": {
+          "displayName": "Tamanho da Fonte",
+          "type": {
+            "numeric": true
+          }
+        },
+        "fontColor": {
+          "displayName": "Cor da Fonte",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "fontFamily": {
+          "displayName": "Família da Fonte",
+          "type": {
+            "text": true
+          }
+        },
+        "displayUnits": {
+          "displayName": "Unidades de Exibição",
+          "type": {
+            "formatting": {
+              "labelDisplayUnits": true
+            }
+          }
+        },
+        "decimalPlaces": {
+          "displayName": "Casas Decimais",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "metaValueSettings": {
+      "displayName": "Configurações da Meta",
+      "properties": {
+        "fontSize": {
+          "displayName": "Tamanho da Fonte",
+          "type": {
+            "numeric": true
+          }
+        },
+        "fontColor": {
+          "displayName": "Cor da Fonte",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "fontFamily": {
+          "displayName": "Família da Fonte",
+          "type": {
+            "text": true
+          }
+        },
+        "displayUnits": {
+          "displayName": "Unidades de Exibição",
+          "type": {
+            "formatting": {
+              "labelDisplayUnits": true
+            }
+          }
+        },
+        "decimalPlaces": {
+          "displayName": "Casas Decimais",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "percentageSettings": {
+      "displayName": "Configurações da Porcentagem",
+      "properties": {
+        "fontSize": {
+          "displayName": "Tamanho da Fonte",
+          "type": {
+            "numeric": true
+          }
+        },
+        "fontColor": {
+          "displayName": "Cor da Fonte",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "fontFamily": {
+          "displayName": "Família da Fonte",
+          "type": {
+            "text": true
+          }
+        }
+      }
+    }
+  },
+  "privileges": []
+}

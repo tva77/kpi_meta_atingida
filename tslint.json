@@ -1,0 +1,30 @@
+{
+  "extends": ["tslint-microsoft-contrib"],
+  "rules": {
+    "export-name": false,
+    "no-relative-imports": false,
+    "no-import-side-effect": false,
+    "no-suspicious-comment": false,
+    "max-func-body-length": false,
+    "no-any": false,
+    "no-unsafe-any": false,
+    "typedef": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "strict-boolean-expressions": false,
+    "no-void-expression": false,
+    "prefer-template": false,
+    "no-single-line-block-comment": false,
+    "no-function-expression": false,
+    "mocha-no-side-effect-code": false,
+    "missing-jsdoc": false,
+    "no-backbone-get-set-outside-model": false,
+    "no-multiline-string": false,
+    "prefer-type-cast": false,
+    "no-reserved-keywords": false,
+    "no-unnecessary-local-variable": false,
+    "completed-docs": false,
+    "newline-before-return": false,
+    "no-parameter-properties": false
+  }
+}
