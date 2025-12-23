@@ -117,14 +117,18 @@ export class Visual implements IVisual {
 
         remainingSection.append("div")
             .classed("kpi-remaining-label", true)
-            .style("font-size", "12px")
+            .style("font-size", `${this.settings.differenceSettings.fontSize}px`)
+            .style("color", this.settings.differenceSettings.fontColor)
+            .style("font-family", this.settings.differenceSettings.fontFamily)
             .text("Diferença:");
 
         remainingSection.append("div")
             .classed("kpi-remaining-value", true)
-            .style("font-size", "12px")
+            .style("font-size", `${this.settings.differenceSettings.fontSize}px`)
+            .style("color", this.settings.differenceSettings.fontColor)
+            .style("font-family", this.settings.differenceSettings.fontFamily)
             .style("text-align", "right")
-            .text(this.formatValue(remaining, this.settings.metaValueSettings.displayUnits, this.settings.metaValueSettings.decimalPlaces));
+            .text(this.formatValue(remaining, this.settings.differenceSettings.displayUnits, this.settings.differenceSettings.decimalPlaces));
     }
 
     private formatValue(value: number, displayUnits: number, decimalPlaces: number): string {

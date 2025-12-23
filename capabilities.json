@@ -150,6 +150,47 @@
           }
         }
       }
+    },
+    "differenceSettings": {
+      "displayName": "Configurações da Diferença",
+      "properties": {
+        "fontSize": {
+          "displayName": "Tamanho da Fonte",
+          "type": {
+            "numeric": true
+          }
+        },
+        "fontColor": {
+          "displayName": "Cor da Fonte",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "fontFamily": {
+          "displayName": "Família da Fonte",
+          "type": {
+            "text": true
+          }
+        },
+        "displayUnits": {
+          "displayName": "Unidades de Exibição",
+          "type": {
+            "formatting": {
+              "labelDisplayUnits": true
+            }
+          }
+        },
+        "decimalPlaces": {
+          "displayName": "Casas Decimais",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
     }
   },
   "privileges": []

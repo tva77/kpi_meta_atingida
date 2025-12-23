@@ -25,10 +25,19 @@ export class PercentageSettings {
     public fontFamily: string = "Segoe UI, sans-serif";
 }
 
+export class DifferenceSettings {
+    public fontSize: number = 14;
+    public fontColor: string = "#6B7280";
+    public fontFamily: string = "DIN, sans-serif";
+    public displayUnits: number = 1; // 0 = Auto, 1 = None, 1000 = K, 1000000 = M, 1000000000 = B
+    public decimalPlaces: number = 0;
+}
+
 export class VisualSettings {
     public valueSettings: ValueSettings = new ValueSettings();
     public metaValueSettings: MetaValueSettings = new MetaValueSettings();
     public percentageSettings: PercentageSettings = new PercentageSettings();
+    public differenceSettings: DifferenceSettings = new DifferenceSettings();
 
     public static parse(dataView: DataView): VisualSettings {
         const settings = new VisualSettings();
@@ -64,6 +73,16 @@ export class VisualSettings {
             if (percentageObj["fontSize"]) settings.percentageSettings.fontSize = percentageObj["fontSize"] as number;
             if (percentageObj["fontColor"]) settings.percentageSettings.fontColor = percentageObj["fontColor"] as string;
             if (percentageObj["fontFamily"]) settings.percentageSettings.fontFamily = percentageObj["fontFamily"] as string;
+        }
+
+        // Parse difference settings
+        if (objects["differenceSettings"]) {
+            const differenceObj = objects["differenceSettings"];
+            if (differenceObj["fontSize"]) settings.differenceSettings.fontSize = differenceObj["fontSize"] as number;
+            if (differenceObj["fontColor"]) settings.differenceSettings.fontColor = differenceObj["fontColor"] as string;
+            if (differenceObj["fontFamily"]) settings.differenceSettings.fontFamily = differenceObj["fontFamily"] as string;
+            if (differenceObj["displayUnits"] !== undefined) settings.differenceSettings.displayUnits = differenceObj["displayUnits"] as number;
+            if (differenceObj["decimalPlaces"] !== undefined) settings.differenceSettings.decimalPlaces = differenceObj["decimalPlaces"] as number;
         }
 
         return settings;
@@ -111,6 +130,19 @@ export class VisualSettings {
                         fontSize: settings.percentageSettings.fontSize,
                         fontColor: settings.percentageSettings.fontColor,
                         fontFamily: settings.percentageSettings.fontFamily
+                    },
+                    selector: null
+                });
+                break;
+            case "differenceSettings":
+                objectEnumeration.push({
+                    objectName: objectName,
+                    properties: {
+                        fontSize: settings.differenceSettings.fontSize,
+                        fontColor: settings.differenceSettings.fontColor,
+                        fontFamily: settings.differenceSettings.fontFamily,
+                        displayUnits: settings.differenceSettings.displayUnits,
+                        decimalPlaces: settings.differenceSettings.decimalPlaces
                     },
                     selector: null
                 });
