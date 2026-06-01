@@ -1,6 +1,6 @@
 {
   "name": "kpi-meta-atingida",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Power BI visual showing KPI goal progress",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "d3": "^5.16.0"
+    "d3": "^5.16.0",
+    "powerbi-visuals-utils-formattingmodel": "^6.2.2"
   }
 }

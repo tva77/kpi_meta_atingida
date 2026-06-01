@@ -8,10 +8,10 @@ import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisual = powerbi.extensibility.visual.IVisual;
 import IVisualHost = powerbi.extensibility.visual.IVisualHost;
 import DataView = powerbi.DataView;
-import VisualObjectInstanceEnumeration = powerbi.VisualObjectInstanceEnumeration;
-import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInstancesOptions;
+import FormattingModel = powerbi.visuals.FormattingModel;
 
 import { VisualSettings } from "./settings";
+import { FormattingSettingsService } from "powerbi-visuals-utils-formattingmodel";
 import * as d3 from "d3";
 
 export class Visual implements IVisual {
@@ -80,11 +80,11 @@ export class Visual implements IVisual {
 
         valueSection.append("div")
             .classed("kpi-current-value", true)
-            .style("font-size", `${this.settings.valueSettings.fontSize}px`)
-            .style("color", this.settings.valueSettings.fontColor)
-            .style("font-family", this.settings.valueSettings.fontFamily)
+            .style("font-size", `${this.settings.valueSettings.fontSize.value}px`)
+            .style("color", this.settings.valueSettings.fontColor.value?.value || "#000000")
+            .style("font-family", this.settings.valueSettings.fontFamily.value)
             .style("text-align", "center")
-            .text(this.formatValue(currentValue, this.settings.valueSettings.displayUnits, this.settings.valueSettings.decimalPlaces));
+            .text(this.formatValue(currentValue, this.settings.valueSettings.displayUnits.value, this.settings.valueSettings.decimalPlaces.value));
 
 
         // Meta section with progress bar
@@ -96,17 +96,17 @@ export class Visual implements IVisual {
 
         metaHeader.append("div")
             .classed("kpi-meta-label", true)
-            .style("font-size", `${this.settings.metaValueSettings.fontSize}px`)
-            .style("color", this.settings.metaValueSettings.fontColor)
-            .style("font-family", this.settings.metaValueSettings.fontFamily)
+            .style("font-size", `${this.settings.metaValueSettings.fontSize.value}px`)
+            .style("color", this.settings.metaValueSettings.fontColor.value?.value || "#000000")
+            .style("font-family", this.settings.metaValueSettings.fontFamily.value)
             .style("text-align", "left")
-            .text(`Meta: ${this.formatValue(targetValue, this.settings.metaValueSettings.displayUnits, this.settings.metaValueSettings.decimalPlaces)}`);
+            .text(`M: ${this.formatValue(targetValue, this.settings.metaValueSettings.displayUnits.value, this.settings.metaValueSettings.decimalPlaces.value)}`);
 
         metaHeader.append("div")
             .classed("kpi-percentage", true)
-            .style("font-size", `${this.settings.percentageSettings.fontSize}px`)
-            .style("color", this.settings.percentageSettings.fontColor)
-            .style("font-family", this.settings.percentageSettings.fontFamily)
+            .style("font-size", `${this.settings.percentageSettings.fontSize.value}px`)
+            .style("color", this.settings.percentageSettings.fontColor.value?.value || "#F59E0B")
+            .style("font-family", this.settings.percentageSettings.fontFamily.value)
             .style("font-weight", "bold")
             .style("text-align", "right")
             .text(`${percentage}%`);
@@ -117,18 +117,10 @@ export class Visual implements IVisual {
 
         remainingSection.append("div")
             .classed("kpi-remaining-label", true)
-            .style("font-size", `${this.settings.differenceSettings.fontSize}px`)
-            .style("color", this.settings.differenceSettings.fontColor)
-            .style("font-family", this.settings.differenceSettings.fontFamily)
-            .text("Diferença:");
-
-        remainingSection.append("div")
-            .classed("kpi-remaining-value", true)
-            .style("font-size", `${this.settings.differenceSettings.fontSize}px`)
-            .style("color", this.settings.differenceSettings.fontColor)
-            .style("font-family", this.settings.differenceSettings.fontFamily)
-            .style("text-align", "right")
-            .text(this.formatValue(remaining, this.settings.differenceSettings.displayUnits, this.settings.differenceSettings.decimalPlaces));
+            .style("font-size", `${this.settings.differenceSettings.fontSize.value}px`)
+            .style("color", this.settings.differenceSettings.fontColor.value?.value || "#6B7280")
+            .style("font-family", this.settings.differenceSettings.fontFamily.value)
+            .text(`D: ${this.formatValue(remaining, this.settings.differenceSettings.displayUnits.value, this.settings.differenceSettings.decimalPlaces.value)}`);
     }
 
     private formatValue(value: number, displayUnits: number, decimalPlaces: number): string {
@@ -169,7 +161,8 @@ export class Visual implements IVisual {
         return <VisualSettings>VisualSettings.parse(dataView);
     }
 
-    public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstanceEnumeration {
-        return VisualSettings.enumerateObjectInstances(this.settings || VisualSettings.getDefault(), options);
+    public getFormattingModel(): FormattingModel {
+        const formattingSettingsService = new FormattingSettingsService();
+        return formattingSettingsService.buildFormattingModel(this.settings || VisualSettings.getDefault());
     }
 }

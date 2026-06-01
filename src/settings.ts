@@ -1,43 +1,183 @@
 "use strict";
 
 import powerbi from "powerbi-visuals-api";
+import { formattingSettings } from "powerbi-visuals-utils-formattingmodel";
 import DataView = powerbi.DataView;
 
-export class ValueSettings {
-    public fontSize: number = 24;
-    public fontColor: string = "#000000";
-    public fontFamily: string = "DIN, sans-serif";
-    public displayUnits: number = 1; // 0 = Auto, 1 = None, 1000 = K, 1000000 = M, 1000000000 = B
-    public decimalPlaces: number = 0;
+class ValueSettings extends formattingSettings.SimpleCard {
+    public name: string = "valueSettings";
+    public displayName: string = "Configurações do Valor";
+
+    public fontSize = new formattingSettings.NumUpDown({
+        name: "fontSize",
+        displayName: "Tamanho da Fonte",
+        value: 20,
+    });
+
+    public fontColor = new formattingSettings.ColorPicker({
+        name: "fontColor",
+        displayName: "Cor da Fonte",
+        value: { value: "#000000" },
+    });
+
+    public fontFamily = new formattingSettings.TextInput({
+        name: "fontFamily",
+        displayName: "Família da Fonte",
+        value: "DIN, sans-serif",
+        placeholder: "DIN, sans-serif",
+    });
+
+    public displayUnits = new formattingSettings.NumUpDown({
+        name: "displayUnits",
+        displayName: "Unidades de Exibição",
+        value: 1,
+    });
+
+    public decimalPlaces = new formattingSettings.NumUpDown({
+        name: "decimalPlaces",
+        displayName: "Casas Decimais",
+        value: 0,
+    });
+
+    public slices: formattingSettings.Slice[] = [
+        this.fontSize,
+        this.fontColor,
+        this.fontFamily,
+        this.displayUnits,
+        this.decimalPlaces,
+    ];
 }
 
-export class MetaValueSettings {
-    public fontSize: number = 16;
-    public fontColor: string = "#000000";
-    public fontFamily: string = "DIN, sans-serif";
-    public displayUnits: number = 1; // 0 = Auto, 1 = None, 1000 = K, 1000000 = M, 1000000000 = B
-    public decimalPlaces: number = 0;
+class MetaValueSettings extends formattingSettings.SimpleCard {
+    public name: string = "metaValueSettings";
+    public displayName: string = "Configurações da Meta";
+
+    public fontSize = new formattingSettings.NumUpDown({
+        name: "fontSize",
+        displayName: "Tamanho da Fonte",
+        value: 12,
+    });
+
+    public fontColor = new formattingSettings.ColorPicker({
+        name: "fontColor",
+        displayName: "Cor da Fonte",
+        value: { value: "#000000" },
+    });
+
+    public fontFamily = new formattingSettings.TextInput({
+        name: "fontFamily",
+        displayName: "Família da Fonte",
+        value: "DIN, sans-serif",
+        placeholder: "DIN, sans-serif",
+    });
+
+    public displayUnits = new formattingSettings.NumUpDown({
+        name: "displayUnits",
+        displayName: "Unidades de Exibição",
+        value: 1,
+    });
+
+    public decimalPlaces = new formattingSettings.NumUpDown({
+        name: "decimalPlaces",
+        displayName: "Casas Decimais",
+        value: 0,
+    });
+
+    public slices: formattingSettings.Slice[] = [
+        this.fontSize,
+        this.fontColor,
+        this.fontFamily,
+        this.displayUnits,
+        this.decimalPlaces,
+    ];
 }
 
-export class PercentageSettings {
-    public fontSize: number = 16;
-    public fontColor: string = "#F59E0B";
-    public fontFamily: string = "Segoe UI, sans-serif";
+class PercentageSettings extends formattingSettings.SimpleCard {
+    public name: string = "percentageSettings";
+    public displayName: string = "Configurações da Porcentagem";
+
+    public fontSize = new formattingSettings.NumUpDown({
+        name: "fontSize",
+        displayName: "Tamanho da Fonte",
+        value: 12,
+    });
+
+    public fontColor = new formattingSettings.ColorPicker({
+        name: "fontColor",
+        displayName: "Cor da Fonte",
+        value: { value: "#F59E0B" },
+    });
+
+    public fontFamily = new formattingSettings.TextInput({
+        name: "fontFamily",
+        displayName: "Família da Fonte",
+        value: "Segoe UI, sans-serif",
+        placeholder: "Segoe UI, sans-serif",
+    });
+
+    public slices: formattingSettings.Slice[] = [
+        this.fontSize,
+        this.fontColor,
+        this.fontFamily,
+    ];
 }
 
-export class DifferenceSettings {
-    public fontSize: number = 14;
-    public fontColor: string = "#6B7280";
-    public fontFamily: string = "DIN, sans-serif";
-    public displayUnits: number = 1; // 0 = Auto, 1 = None, 1000 = K, 1000000 = M, 1000000000 = B
-    public decimalPlaces: number = 0;
+class DifferenceSettings extends formattingSettings.SimpleCard {
+    public name: string = "differenceSettings";
+    public displayName: string = "Configurações da Diferença";
+
+    public fontSize = new formattingSettings.NumUpDown({
+        name: "fontSize",
+        displayName: "Tamanho da Fonte",
+        value: 12,
+    });
+
+    public fontColor = new formattingSettings.ColorPicker({
+        name: "fontColor",
+        displayName: "Cor da Fonte",
+        value: { value: "#6B7280" },
+    });
+
+    public fontFamily = new formattingSettings.TextInput({
+        name: "fontFamily",
+        displayName: "Família da Fonte",
+        value: "DIN, sans-serif",
+        placeholder: "DIN, sans-serif",
+    });
+
+    public displayUnits = new formattingSettings.NumUpDown({
+        name: "displayUnits",
+        displayName: "Unidades de Exibição",
+        value: 1,
+    });
+
+    public decimalPlaces = new formattingSettings.NumUpDown({
+        name: "decimalPlaces",
+        displayName: "Casas Decimais",
+        value: 0,
+    });
+
+    public slices: formattingSettings.Slice[] = [
+        this.fontSize,
+        this.fontColor,
+        this.fontFamily,
+        this.displayUnits,
+        this.decimalPlaces,
+    ];
 }
 
-export class VisualSettings {
+export class VisualSettings extends formattingSettings.Model {
     public valueSettings: ValueSettings = new ValueSettings();
     public metaValueSettings: MetaValueSettings = new MetaValueSettings();
     public percentageSettings: PercentageSettings = new PercentageSettings();
     public differenceSettings: DifferenceSettings = new DifferenceSettings();
+
+    public cards: formattingSettings.Cards[] = [
+        this.valueSettings,
+        this.metaValueSettings,
+        this.percentageSettings,
+        this.differenceSettings,
+    ];
 
     public static parse(dataView: DataView): VisualSettings {
         const settings = new VisualSettings();
@@ -50,39 +190,39 @@ export class VisualSettings {
         // Parse value settings
         if (objects["valueSettings"]) {
             const valueObj = objects["valueSettings"];
-            if (valueObj["fontSize"]) settings.valueSettings.fontSize = valueObj["fontSize"] as number;
-            if (valueObj["fontColor"]) settings.valueSettings.fontColor = valueObj["fontColor"] as string;
-            if (valueObj["fontFamily"]) settings.valueSettings.fontFamily = valueObj["fontFamily"] as string;
-            if (valueObj["displayUnits"] !== undefined) settings.valueSettings.displayUnits = valueObj["displayUnits"] as number;
-            if (valueObj["decimalPlaces"] !== undefined) settings.valueSettings.decimalPlaces = valueObj["decimalPlaces"] as number;
+            if (valueObj["fontSize"]) settings.valueSettings.fontSize.value = valueObj["fontSize"] as number;
+            if (valueObj["fontColor"]) settings.valueSettings.fontColor.value = valueObj["fontColor"] as any;
+            if (valueObj["fontFamily"]) settings.valueSettings.fontFamily.value = valueObj["fontFamily"] as string;
+            if (valueObj["displayUnits"] !== undefined) settings.valueSettings.displayUnits.value = valueObj["displayUnits"] as number;
+            if (valueObj["decimalPlaces"] !== undefined) settings.valueSettings.decimalPlaces.value = valueObj["decimalPlaces"] as number;
         }
 
         // Parse meta value settings
         if (objects["metaValueSettings"]) {
             const metaValueObj = objects["metaValueSettings"];
-            if (metaValueObj["fontSize"]) settings.metaValueSettings.fontSize = metaValueObj["fontSize"] as number;
-            if (metaValueObj["fontColor"]) settings.metaValueSettings.fontColor = metaValueObj["fontColor"] as string;
-            if (metaValueObj["fontFamily"]) settings.metaValueSettings.fontFamily = metaValueObj["fontFamily"] as string;
-            if (metaValueObj["displayUnits"] !== undefined) settings.metaValueSettings.displayUnits = metaValueObj["displayUnits"] as number;
-            if (metaValueObj["decimalPlaces"] !== undefined) settings.metaValueSettings.decimalPlaces = metaValueObj["decimalPlaces"] as number;
+            if (metaValueObj["fontSize"]) settings.metaValueSettings.fontSize.value = metaValueObj["fontSize"] as number;
+            if (metaValueObj["fontColor"]) settings.metaValueSettings.fontColor.value = metaValueObj["fontColor"] as any;
+            if (metaValueObj["fontFamily"]) settings.metaValueSettings.fontFamily.value = metaValueObj["fontFamily"] as string;
+            if (metaValueObj["displayUnits"] !== undefined) settings.metaValueSettings.displayUnits.value = metaValueObj["displayUnits"] as number;
+            if (metaValueObj["decimalPlaces"] !== undefined) settings.metaValueSettings.decimalPlaces.value = metaValueObj["decimalPlaces"] as number;
         }
 
         // Parse percentage settings
         if (objects["percentageSettings"]) {
             const percentageObj = objects["percentageSettings"];
-            if (percentageObj["fontSize"]) settings.percentageSettings.fontSize = percentageObj["fontSize"] as number;
-            if (percentageObj["fontColor"]) settings.percentageSettings.fontColor = percentageObj["fontColor"] as string;
-            if (percentageObj["fontFamily"]) settings.percentageSettings.fontFamily = percentageObj["fontFamily"] as string;
+            if (percentageObj["fontSize"]) settings.percentageSettings.fontSize.value = percentageObj["fontSize"] as number;
+            if (percentageObj["fontColor"]) settings.percentageSettings.fontColor.value = percentageObj["fontColor"] as any;
+            if (percentageObj["fontFamily"]) settings.percentageSettings.fontFamily.value = percentageObj["fontFamily"] as string;
         }
 
         // Parse difference settings
         if (objects["differenceSettings"]) {
             const differenceObj = objects["differenceSettings"];
-            if (differenceObj["fontSize"]) settings.differenceSettings.fontSize = differenceObj["fontSize"] as number;
-            if (differenceObj["fontColor"]) settings.differenceSettings.fontColor = differenceObj["fontColor"] as string;
-            if (differenceObj["fontFamily"]) settings.differenceSettings.fontFamily = differenceObj["fontFamily"] as string;
-            if (differenceObj["displayUnits"] !== undefined) settings.differenceSettings.displayUnits = differenceObj["displayUnits"] as number;
-            if (differenceObj["decimalPlaces"] !== undefined) settings.differenceSettings.decimalPlaces = differenceObj["decimalPlaces"] as number;
+            if (differenceObj["fontSize"]) settings.differenceSettings.fontSize.value = differenceObj["fontSize"] as number;
+            if (differenceObj["fontColor"]) settings.differenceSettings.fontColor.value = differenceObj["fontColor"] as any;
+            if (differenceObj["fontFamily"]) settings.differenceSettings.fontFamily.value = differenceObj["fontFamily"] as string;
+            if (differenceObj["displayUnits"] !== undefined) settings.differenceSettings.displayUnits.value = differenceObj["displayUnits"] as number;
+            if (differenceObj["decimalPlaces"] !== undefined) settings.differenceSettings.decimalPlaces.value = differenceObj["decimalPlaces"] as number;
         }
 
         return settings;
@@ -90,65 +230,5 @@ export class VisualSettings {
 
     public static getDefault(): VisualSettings {
         return new VisualSettings();
-    }
-
-    public static enumerateObjectInstances(settings: VisualSettings, options: powerbi.EnumerateVisualObjectInstancesOptions): powerbi.VisualObjectInstanceEnumeration {
-        const objectName = options.objectName;
-        const objectEnumeration: powerbi.VisualObjectInstance[] = [];
-
-        switch (objectName) {
-            case "valueSettings":
-                objectEnumeration.push({
-                    objectName: objectName,
-                    properties: {
-                        fontSize: settings.valueSettings.fontSize,
-                        fontColor: settings.valueSettings.fontColor,
-                        fontFamily: settings.valueSettings.fontFamily,
-                        displayUnits: settings.valueSettings.displayUnits,
-                        decimalPlaces: settings.valueSettings.decimalPlaces
-                    },
-                    selector: null
-                });
-                break;
-            case "metaValueSettings":
-                objectEnumeration.push({
-                    objectName: objectName,
-                    properties: {
-                        fontSize: settings.metaValueSettings.fontSize,
-                        fontColor: settings.metaValueSettings.fontColor,
-                        fontFamily: settings.metaValueSettings.fontFamily,
-                        displayUnits: settings.metaValueSettings.displayUnits,
-                        decimalPlaces: settings.metaValueSettings.decimalPlaces
-                    },
-                    selector: null
-                });
-                break;
-            case "percentageSettings":
-                objectEnumeration.push({
-                    objectName: objectName,
-                    properties: {
-                        fontSize: settings.percentageSettings.fontSize,
-                        fontColor: settings.percentageSettings.fontColor,
-                        fontFamily: settings.percentageSettings.fontFamily
-                    },
-                    selector: null
-                });
-                break;
-            case "differenceSettings":
-                objectEnumeration.push({
-                    objectName: objectName,
-                    properties: {
-                        fontSize: settings.differenceSettings.fontSize,
-                        fontColor: settings.differenceSettings.fontColor,
-                        fontFamily: settings.differenceSettings.fontFamily,
-                        displayUnits: settings.differenceSettings.displayUnits,
-                        decimalPlaces: settings.differenceSettings.decimalPlaces
-                    },
-                    selector: null
-                });
-                break;
-        }
-
-        return objectEnumeration;
     }
 }
